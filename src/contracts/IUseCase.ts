@@ -1,3 +1,3 @@
-export interface IUseCase<Input = void, Output = void> {
+export interface IUseCase<Input, Output > {
   perform(input: Input): Promise<Output>;
 }

@@ -1,3 +1,3 @@
-export interface IController<RequestType = any, ResponseType = any> {
+export interface IController<RequestType, ResponseType > {
   handle(request: RequestType): Promise<ResponseType>;
 }
