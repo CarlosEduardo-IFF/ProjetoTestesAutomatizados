@@ -3,28 +3,26 @@ import { MongoClient } from "../../src/data/mongo/Mongo";
 import { Donation } from "../../src/domain/entities/Donation";
 
 // fake do cursor que é retornado pelo MongoDB
-class FakeCursor {
-  constructor(private data: any[]) {}
+class FakeCursor<T> {
+  constructor(private data: T[]) {}
 
-  // imita o toArray do mongoDb
-  async toArray() {
+  async toArray(): Promise<T[]> {
     return this.data;
   }
 }
 
 // um fake da coleção
-class FakeCollection {
-  constructor(private data: any[]) {}
+class FakeCollection<T> {
+  constructor(private data: T[]) {}
 
-  // retorna o cursor falso
-  find() {
-    return new FakeCursor(this.data);
+  find(): FakeCursor<T> {
+    return new FakeCursor<T>(this.data);
   }
 }
 
 // um fake do MongoDB
 class FakeDb {
-  constructor(private data: any[]) {}
+  constructor(private data: Donation[]) {}
 
   collection(name: string) {
     if (name === "donations") {

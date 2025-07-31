@@ -30,7 +30,7 @@ class FakeUseCaseError implements IUseCase<void, SystemDataResponse> {
 }
 
 // compara objetos usando JSON
-function deepEqual(a: any, b: any): boolean {
+function deepEqual<T>(a: T, b: T): boolean {
   try {
     return JSON.stringify(a) === JSON.stringify(b);
   } catch {
