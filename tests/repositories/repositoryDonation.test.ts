@@ -94,19 +94,19 @@ async function testFindAllReturnsMappedDonations() {
 }
 
 // ======== Teste 2: verifica se retorna vazio quando nao tem dados ========
-async function testFindAllReturnsEmptyArray() {
+async function testFindAllReturnsEmptyArrayDonations() {
   const repository = createSUT([]);
   const result = await repository.findAll();
 
   // analisa se o arry esta vazio
-  console.assert(Array.isArray(result) && result.length === 0, "testFindAllReturnsEmptyArray falhou");
+  console.assert(Array.isArray(result) && result.length === 0, "testFindAllReturnsEmptyArrayDonations falhou");
   if (Array.isArray(result) && result.length === 0) {
-    console.log("testFindAllReturnsEmptyArray passou");
+    console.log("testFindAllReturnsEmptyArrayDonations passou");
   }
 }
 
 //executa os testes
 export async function runTests() {
   await testFindAllReturnsMappedDonations();
-  await testFindAllReturnsEmptyArray();
+  await testFindAllReturnsEmptyArrayDonations();
 }

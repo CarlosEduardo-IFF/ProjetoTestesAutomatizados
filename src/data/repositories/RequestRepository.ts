@@ -1,6 +1,6 @@
 import { IRepository } from "@/contracts/IRepository";
 import { Request } from "@/domain/entities/Request";
-import { MongoClient } from "@/data/mongo/Mongo"
+import { MongoClient } from "../mongo/Mongo";
 
 export class RequestRepository implements IRepository<Request> {
   async findAll(): Promise<Request[]> {

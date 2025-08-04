@@ -62,10 +62,10 @@ async function testHandleReturnsSystemData() {
     // analisa se o resultado retornado é igual ao esperado
     console.assert(deepEqual(result, expected), "testHandleReturnsSystemData falhou");
     if (deepEqual(result, expected)) {
-      console.log("testHandleReturnsSystemData passou");
+      console.log("testHandleReturnsSystemDataController passou");
     }
   } catch (error) {
-    console.error("testHandleReturnsSystemData falhou com erro:", error);
+    console.error("testHandleReturnsSystemDataController falhou com erro:", error);
   }
 }
 
@@ -79,9 +79,9 @@ async function testHandlePropagatesError() {
     console.error("testHandlePropagatesError falhou: esperava erro mas não lançou");
   } catch (error) {
     if ((error as Error).message === "Falha ao obter dados do sistema") {
-      console.log("testHandlePropagatesError passou");
+      console.log("testHandlePropagatesErrorController passou");
     } else {
-      console.error("testHandlePropagatesError falhou com mensagem inesperada:", error);
+      console.error("testHandlePropagatesErrorController falhou com mensagem inesperada:", error);
     }
   }
 }
