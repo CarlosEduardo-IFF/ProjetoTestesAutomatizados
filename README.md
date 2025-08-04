@@ -1,6 +1,6 @@
 # Projeto de Testes Automatizados
 
----
+
 Este projeto foi desenvolvido como parte da disciplina de **Testes Automatizados**. Seu principal objetivo é implementar um **caso de uso de listagem (GetAll)** de objetos do sistema.
 ---
 
