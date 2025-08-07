@@ -19,17 +19,17 @@ Antes de iniciar, certifique-se de ter o Docker e o Docker Compose instalados em
 
 **Para rodar tudo (aplicação + testes):**
 ```cmd
-docker-compose up
+docker compose up
 ```
 
 **Para rodar apenas os testes:**
 ```cmd
-docker-compose up tests
+docker compose up tests
 ```
 
 **Para rodar apenas a aplicação:**
 ```cmd
-docker-compose up app
+docker compose up app
 ```
 
 ### Executando Localmente (sem Docker)
