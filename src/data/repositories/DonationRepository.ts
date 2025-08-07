@@ -1,17 +1,14 @@
 import { IRepository } from "@/contracts/IRepository";
 import { Donation } from "@/domain/entities/Donation";
-import { MongoClient } from "../mongo/Mongo";
+import { IDatabase } from "@/contracts/IDatabase";
 
 export class DonationRepository implements IRepository<Donation> {
-  async findAll(): Promise<Donation[]> {
-    const donations = await MongoClient.db
-      .collection<Donation>("donations")
-      .find({})
-      .toArray();
+  db: IDatabase;
+  constructor(db: IDatabase) {
+    this.db = db;
+  }
 
-    return donations.map(({ _id, ...rest }) => ({
-      ...rest,
-      id: _id.toHexString(),
-    }));
+  async findAll(): Promise<Donation[]> {
+    return await this.db.findAll<Donation>("donations");
   }
 }

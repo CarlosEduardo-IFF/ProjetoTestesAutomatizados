@@ -1,17 +1,15 @@
 import { IRepository } from "@/contracts/IRepository";
 import { Request } from "@/domain/entities/Request";
-import { MongoClient } from "../mongo/Mongo";
+import { IDatabase } from "@/contracts/IDatabase";
 
 export class RequestRepository implements IRepository<Request> {
+
+  db: IDatabase;
+  constructor(db: IDatabase) {
+    this.db = db;
+  }
+
   async findAll(): Promise<Request[]> {
-    const requests = await MongoClient.db
-      .collection<Request>("requests")
-      .find({})
-      .toArray();
-    
-    return requests.map(({ _id, ...rest }) => ({
-      ...rest,
-      id: _id.toHexString(),
-    }));
+    return await this.db.findAll<Request>("requests");
   }
 }

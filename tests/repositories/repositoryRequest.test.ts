@@ -1,32 +1,17 @@
 import { RequestRepository } from "../../src/data/repositories/RequestRepository";
-import { MongoClient } from "../../src/data/mongo/Mongo";
 import { Request } from "../../src/domain/entities/Request";
-
-// fake do cursor que é retornado pelo MongoDB
-class FakeCursor<T> {
-  constructor(private data: T[]) {}
-  
-  async toArray(): Promise<T[]> {
-    return this.data;
-  }
-}
-
-// um fake da coleção
-class FakeCollection<T> {
-  constructor(private data: T[]) {}
-
-  find(): FakeCursor<T> {
-    return new FakeCursor<T>(this.data);
-  }
-}
+import { IDatabase } from "../../src/contracts/IDatabase";
 
 // um fake do MongoDB
-class FakeDb {
+class FakeDatabase implements IDatabase {
   constructor(private data: Request[]) {}
 
-  collection(name: string) {
-    if (name === "requests") {
-      return new FakeCollection(this.data);
+  async findAll<T>(collectionName: string): Promise<T[]> {
+    if (collectionName === "requests") {
+      return this.data.map((request: any) => ({
+        ...request,
+        id: request._id.toHexString(),
+      })) as T[];
     }
     throw new Error("Collection não encontrada");
   }
@@ -50,8 +35,8 @@ function deepEqual(a: Request[], b: Request[]): boolean {
 
 // cria um SUT com dados simulados
 function createSUT(mockRequests: any[]) {
-  MongoClient.db = new FakeDb(mockRequests) as any;
-  return new RequestRepository();
+  const fakeDb = new FakeDatabase(mockRequests);
+  return new RequestRepository(fakeDb);
 }
 
 // ======== Teste 1: verifica se retorna os dados corretamente ========
